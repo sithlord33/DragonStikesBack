@@ -15,7 +15,8 @@
         android:text="@string/start_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_custom"/>
 
     <Button
         android:id="@+id/options"
@@ -27,7 +28,8 @@
         app:layout_constraintBottom_toTopOf="@+id/quit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        android:background="@drawable/button_custom"/>
 
     <Button
         android:id="@+id/quit"
@@ -37,5 +39,6 @@
         android:text="@string/quit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/button_custom"/>
 </android.support.constraint.ConstraintLayout>
