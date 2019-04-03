@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Dragon Stikes Back</string>
+    <string name="options">OPTIONS</string>
+    <string name="quit">QUIT</string>
+    <string name="start_game">START GAME</string>
+</resources>
