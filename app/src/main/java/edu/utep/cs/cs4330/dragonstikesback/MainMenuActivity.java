@@ -1,6 +1,7 @@
 package edu.utep.cs.cs4330.dragonstikesback;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +30,15 @@ public class MainMenuActivity extends AppCompatActivity {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                System.exit(0);
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainMenuActivity.this);
+                adb.setTitle("Quit?");
+                adb.setMessage("Are you sure you want to QUIT?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", (dialog, which) -> {
+                    finish();
+                    System.exit(0);
+                });
+                adb.show();
             }
         });
     }

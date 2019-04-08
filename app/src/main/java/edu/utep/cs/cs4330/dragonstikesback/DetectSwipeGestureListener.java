@@ -31,24 +31,18 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         float deltaXAbs = Math.abs(deltaX);
         float deltaYAbs = Math.abs(deltaY);
 
-        if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X))
-        {
-            if(deltaX > 0)
-            {
+        if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
+            if (deltaX > 0) {
                 this.activity.displayMessage("Swipe to left");
-            }else
-            {
+            } else {
                 this.activity.displayMessage("Swipe to right");
             }
         }
 
-        if((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y))
-        {
-            if(deltaY > 0)
-            {
+        if ((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
+            if (deltaY > 0) {
                 this.activity.displayMessage("Swipe to up");
-            }else
-            {
+            } else {
                 this.activity.displayMessage("Swipe to down");
             }
         }
