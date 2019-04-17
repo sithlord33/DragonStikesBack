@@ -41,9 +41,13 @@ public class MainActivity extends AppCompatActivity {
         if (game.isWin()) {
             finish();
         }
-        displayImage(game.nextInstruction());
         try {
-            TimeUnit.MILLISECONDS.sleep(1000);
+            displayImage(game.nextInstruction());
+        }
+        catch (  java.util.NoSuchElementException e){
+        }
+        try {
+            TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
