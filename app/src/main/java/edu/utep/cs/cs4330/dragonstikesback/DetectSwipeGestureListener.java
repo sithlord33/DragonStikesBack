@@ -33,17 +33,17 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
         if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
             if (deltaX > 0) {
-                this.activity.displayMessage("Swipe to left");
+                GamePanel.DIRECTION = 2;
             } else {
-                this.activity.displayMessage("Swipe to right");
+                GamePanel.DIRECTION = 3;
             }
         }
 
         if ((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
             if (deltaY > 0) {
-                this.activity.displayMessage("Swipe to up");
+                GamePanel.DIRECTION = 0;
             } else {
-                this.activity.displayMessage("Swipe to down");
+                GamePanel.DIRECTION = 1;
             }
         }
 
@@ -53,13 +53,13 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        this.activity.displayMessage("Single tap occurred.");
+        GamePanel.DIRECTION = 4;
         return true;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent e) {
-        this.activity.displayMessage("Double tap occurred.");
+        GamePanel.DIRECTION = 5;
         return true;
     }
 }

@@ -1,27 +1,27 @@
 package edu.utep.cs.cs4330.dragonstikesback;
 
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.util.concurrent.TimeUnit;
+import android.util.DisplayMetrics;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView textView;
-    private ImageView imageView;
-    private GestureDetectorCompat gestureDetectorCompat;
-    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        textView = findViewById(R.id.detect_swipe_direction_textview);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Constants.SCREEN_WIDTH = dm.widthPixels;
+        Constants.SCREEN_HEIGHT = dm.heightPixels;
+
+        setContentView(new GamePanel(this));
+
+        /*textView = findViewById(R.id.detect_swipe_direction_textview);
         imageView = findViewById(R.id.imageView);
         imageView.setAlpha(127);
 
@@ -31,32 +31,20 @@ public class MainActivity extends AppCompatActivity {
 
         gestureListener.setActivity(this);
 
-        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
+        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);*/
     }
 
-    @Override
+    /*@Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetectorCompat.onTouchEvent(event);
-        imageView.setImageResource(android.R.color.transparent);
-        if (game.isWin()) {
-            finish();
-        }
-        try {
-            displayImage(game.nextInstruction());
-        }
-        catch (  java.util.NoSuchElementException e){
-        }
-        try {
-            TimeUnit.MILLISECONDS.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String params = "50";
+        asyncTask = new InstructionTask().execute(params);
         return true;
     }
 
-    public void displayMessage(String message) {
+    public void displayMessage(String DIRECTION) {
         if (textView != null)
-            textView.setText(message);
+            textView.setText(DIRECTION);
     }
 
     public void displayImage(int value) {
@@ -82,5 +70,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 imageView.setImageResource(R.drawable.start);
         }
-    }
+    }*/
 }
