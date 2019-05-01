@@ -4,22 +4,28 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.concurrent.TimeUnit;
+
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
     private Rect r = new Rect();
-    private Rect a = new Rect();
+    private Rect a = new Rect(100,100,100,100);
 
     private Player player;
+    private Point playerPoint;
     private Action actions;
 
     private GestureDetectorCompat gestureDetectorCompat;
+    private MediaPlayer mp;
 
     private long frameTime;
 
@@ -36,12 +42,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         thread = new MainThread(getHolder(), this);
 
-        player = new Player();
+        player = new Player(new Rect(100, 100, 200, 200));
+        playerPoint = new Point(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4);
+        player.update(playerPoint);
+
         actions = new Action();
 
         DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
         gestureListener.setActivity((MainActivity) Constants.CURRENT_CONTEXT);
         gestureDetectorCompat = new GestureDetectorCompat(context, gestureListener);
+
+        mp = new MediaPlayer();
 
         setFocusable(true);
     }
@@ -79,6 +90,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         gestureDetectorCompat.onTouchEvent(event);
         player.setDirection(DIRECTION);
         actions.update();
+
         return true;
     }
 
@@ -92,11 +104,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         paint.setTextSize(100);
         paint.setColor(Color.MAGENTA);
 
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(a);
+        try {
+            TimeUnit.MILLISECONDS.sleep(500);
+            actions.draw(canvas, a);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        player.draw(canvas);
+
+        canvas.getClipBounds(a);
         drawCenterText(canvas, paint, String.valueOf(DIRECTION));
-        actions.draw(canvas, a);
 
         if (gameOver) {
             paint = new Paint();
@@ -113,15 +131,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             int elapsedTime = (int) (System.currentTimeMillis() - frameTime);
             frameTime = System.currentTimeMillis();
 
-            /*if (playerPoint.x < 0)
-                playerPoint.x = 0;
-            else if (playerPoint.x > Constants.SCREEN_WIDTH)
-                playerPoint.x = Constants.SCREEN_WIDTH;
-            if (playerPoint.y < 0)
-                playerPoint.y = 0;
-            else if (playerPoint.y > Constants.SCREEN_HEIGHT)
-                playerPoint.y = Constants.SCREEN_HEIGHT;
+            player.update(playerPoint);
 
+            /*
             player.update(playerPoint);
             obstacleManager.update();
 

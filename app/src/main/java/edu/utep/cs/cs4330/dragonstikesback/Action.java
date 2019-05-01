@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class Action {
     private HashMap<String, Bitmap> actions;
@@ -33,6 +32,25 @@ public class Action {
         actions.put("attack", attackImg);
         displayTime = 1;
         index = 0;
+    }
+
+    public Bitmap getAction() {
+        switch (direction) {
+            case 0:
+                return actions.get("up");
+            case 1:
+                return actions.get("down");
+            case 2:
+                return actions.get("left");
+            case 3:
+                return actions.get("right");
+            case 4:
+                return actions.get("tap");
+            case 5:
+                return actions.get("taptap");
+            default:
+        }
+        return null;
     }
 
     public boolean playerMistake(Player player){

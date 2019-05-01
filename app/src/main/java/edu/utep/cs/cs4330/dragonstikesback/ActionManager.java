@@ -38,16 +38,8 @@ public class ActionManager {
         return false;
     }
 
-    /*private void populateObstacles() {
-        int currY = -5 * Constants.SCREEN_HEIGHT / 4;
-        while (currY < 0) {
-            int xStart = (int) (Math.random() * (Constants.SCREEN_WIDTH - playerGap));
-            obstacles.add(new Obstacle(obstacleHeight, color, xStart, currY, playerGap));
-            currY += obstacleHeight + obstacleGap;
-        }
-    }
 
-    public void update() {
+    /*public void update() {
         if(startTime < Constants.INIT_TIME)
             startTime = Constants.INIT_TIME;
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
@@ -62,9 +54,9 @@ public class ActionManager {
             obstacles.remove(obstacles.size() - 1);
             score++;
         }
-    }
+    }*/
 
-    public void draw(Canvas canvas) {
+    /*public void draw(Canvas canvas) {
         for (Obstacle ob : obstacles)
             ob.draw(canvas);
         Paint paint = new Paint();
